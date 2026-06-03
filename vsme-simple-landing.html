@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VSME Simple — Informe de sostenibilidad para pymes españolas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+:root {
+  --ink:        #0f1a14;
+  --ink-2:      #3a4a40;
+  --ink-3:      #6b7c72;
+  --paper:      #f5f2eb;
+  --paper-2:    #edeae1;
+  --paper-3:    #e4e0d5;
+  --green:      #2d6a4f;
+  --green-lt:   #d8ece3;
+  --red-lt:     #fce8e8;
+  --red:        #b91c1c;
+  --border:     #d6d1c5;
+  --max:        1080px;
+  --r:          6px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Figtree', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.6;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--paper);}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px;}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:100;
+  padding: 0 40px;
+  height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(245,242,235,0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.15rem;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.nav-logo sup {
+  font-family: 'Figtree', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 600;
+  color: var(--green);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  vertical-align: super;
+  margin-left: 3px;
+}
+.nav-links {
+  display: flex; align-items: center; gap: 32px;
+}
+.nav-links a {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--ink-2);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--green); }
+.nav-cta {
+  background: var(--green) !important;
+  color: #fff !important;
+  padding: 8px 18px;
+  border-radius: var(--r);
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+}
+.nav-cta:hover { opacity: 0.88; }
+
+/* ─── HERO ─── */
+.hero {
+  padding: 140px 24px 100px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content:'';
+  position:absolute; bottom:0; left:0; right:0; height:1px;
+  background: var(--border);
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 32px;
+}
+.hero-eyebrow::before,
+.hero-eyebrow::after {
+  content:'';
+  display:block;
+  width: 32px; height: 1px;
+  background: var(--green);
+  opacity: 0.5;
+}
+h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  max-width: 760px;
+  margin: 0 auto 28px;
+}
+h1 em {
+  font-style: italic;
+  color: var(--green);
+}
+.hero-sub {
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: var(--ink-2);
+  max-width: 540px;
+  margin: 0 auto 48px;
+  line-height: 1.75;
+}
+.hero-form {
+  display: flex; gap: 8px;
+  max-width: 440px;
+  margin: 0 auto 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.hero-form input {
+  flex:1; min-width: 200px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 12px 16px;
+  font-size: 0.9rem;
+  font-family: 'Figtree', sans-serif;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.hero-form input:focus { border-color: var(--green); }
+.hero-form input::placeholder { color: var(--ink-3); }
+.btn {
+  background: var(--green);
+  color: #fff;
+  font-family: 'Figtree', sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  padding: 12px 22px;
+  border-radius: var(--r);
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  letter-spacing: 0.01em;
+}
+.btn:hover { opacity: 0.88; }
+.hero-note {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+  font-weight: 400;
+}
+.hero-clients {
+  margin-top: 64px;
+  display: flex; flex-wrap: wrap; gap: 8px;
+  justify-content: center; align-items: center;
+}
+.hero-clients-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  width: 100%;
+  text-align: center;
+  margin-bottom: 8px;
+}
+.client-tag {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 5px 14px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--ink-2);
+  background: #fff;
+}
+
+/* ─── SECTIONS ─── */
+section { padding: 96px 24px; }
+.container { max-width: var(--max); margin: 0 auto; }
+
+.section-kicker {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 14px;
+}
+h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 18px;
+}
+.section-body {
+  font-size: 0.97rem;
+  font-weight: 300;
+  color: var(--ink-2);
+  max-width: 520px;
+  line-height: 1.8;
+}
+
+/* ─── PROBLEMA ─── */
+.problema { background: #fff; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+.problema-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 72px;
+  align-items: start;
+  margin-top: 56px;
+}
+.problema-copy h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.45rem;
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+.problema-copy p {
+  font-size: 0.92rem;
+  font-weight: 300;
+  color: var(--ink-2);
+  line-height: 1.8;
+  margin-bottom: 14px;
+}
+.pain-items { display: flex; flex-direction: column; gap: 12px; }
+.pain-item {
+  display: flex; gap: 14px; align-items: flex-start;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 16px 18px;
+}
+.pain-icon {
+  width: 32px; height: 32px; flex-shrink: 0;
+  background: var(--red-lt);
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem;
+  color: var(--red);
+  font-weight: 700;
+}
+.pain-item p {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--ink-2);
+  line-height: 1.6;
+  margin: 0;
+  padding-top: 4px;
+}
+
+/* ─── CÓMO FUNCIONA ─── */
+.como { }
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 56px;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+}
+.step {
+  padding: 36px 30px;
+  background: #fff;
+  border-right: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.step:last-child { border-right: none; }
+.step:hover { background: var(--paper); }
+.step-n {
+  font-family: 'DM Serif Display', serif;
+  font-size: 3rem;
+  font-weight: 400;
+  color: var(--paper-3);
+  line-height: 1;
+  margin-bottom: 20px;
+}
+.step h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--ink);
+  line-height: 1.35;
+}
+.step p {
+  font-size: 0.855rem;
+  font-weight: 300;
+  color: var(--ink-2);
+  line-height: 1.75;
+}
+
+/* ─── PARA QUIÉN ─── */
+.para-quien { background: #fff; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+.audience-grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 16px;
+  margin-top: 48px;
+}
+.aud-card {
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 28px;
+  background: var(--paper);
+  transition: border-color 0.2s, background 0.2s;
+}
+.aud-card:hover { border-color: var(--green); background: var(--green-lt); }
+.aud-icon {
+  width: 36px; height: 36px;
+  background: var(--green-lt);
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+}
+.aud-icon svg { width:18px; height:18px; stroke: var(--green); fill:none; stroke-width:1.8; }
+.aud-card h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 8px; }
+.aud-card p { font-size: 0.83rem; font-weight: 300; color: var(--ink-2); line-height: 1.7; }
+
+/* ─── COMPARATIVA ─── */
+.comparativa { }
+.vs-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 48px;
+}
+.vs-card {
+  border-radius: var(--r);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.vs-head {
+  padding: 16px 24px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+.vs-card.malo .vs-head { background: var(--red-lt); color: var(--red); }
+.vs-card.bueno .vs-head { background: var(--green-lt); color: var(--green); }
+.vs-body { padding: 24px; background: #fff; }
+.vs-row {
+  display: flex; gap: 12px; align-items: flex-start;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--paper-2);
+  font-size: 0.855rem;
+  font-weight: 400;
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+.vs-row:last-child { border-bottom: none; padding-bottom: 0; }
+.vs-check {
+  flex-shrink: 0;
+  margin-top: 1px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+.vs-card.malo .vs-check { color: var(--red); }
+.vs-card.bueno .vs-check { color: var(--green); }
+
+/* ─── CTA FINAL ─── */
+.cta-final {
+  background: var(--ink);
+  color: #fff;
+  text-align: center;
+}
+.cta-final .section-kicker { color: #86c5a3; }
+.cta-final h2 {
+  color: #fff;
+  max-width: 600px;
+  margin: 0 auto 16px;
+}
+.cta-final .section-body {
+  color: rgba(255,255,255,0.55);
+  margin: 0 auto 40px;
+  max-width: 480px;
+}
+.cta-final-form {
+  display: flex; gap: 8px;
+  max-width: 440px;
+  margin: 0 auto 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.cta-final-form input {
+  flex:1; min-width: 200px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: var(--r);
+  padding: 12px 16px;
+  font-size: 0.9rem;
+  font-family: 'Figtree', sans-serif;
+  color: #fff;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.cta-final-form input:focus { border-color: rgba(255,255,255,0.45); }
+.cta-final-form input::placeholder { color: rgba(255,255,255,0.35); }
+.cta-final .hero-note { color: rgba(255,255,255,0.35); }
+
+/* ─── FOOTER ─── */
+footer {
+  padding: 28px 40px;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px;
+}
+.footer-brand {
+  font-family: 'DM Serif Display', serif;
+  font-size: 0.95rem;
+  color: var(--ink-2);
+}
+footer p {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+footer a { color: var(--green); text-decoration: none; }
+
+/* ─── SUCCESS ─── */
+.success-msg {
+  display: none;
+  background: var(--green-lt);
+  border: 1px solid var(--green);
+  border-radius: var(--r);
+  padding: 12px 20px;
+  color: var(--green);
+  font-size: 0.875rem;
+  font-weight: 500;
+  max-width: 440px;
+  margin: 0 auto;
+  text-align: center;
+}
+.cta-final .success-msg {
+  background: rgba(45,106,79,0.2);
+  border-color: rgba(134,197,163,0.5);
+  color: #86c5a3;
+}
+
+/* ─── REVEAL ─── */
+.reveal {
+  opacity:0;
+  transform: translateY(22px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.in { opacity:1; transform:translateY(0); }
+.d1{transition-delay:.08s}
+.d2{transition-delay:.16s}
+.d3{transition-delay:.24s}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:768px){
+  nav{padding:0 20px;}
+  .nav-links a:not(.nav-cta){display:none;}
+  .problema-layout,.vs-wrap,.audience-grid{grid-template-columns:1fr;}
+  .steps-grid{grid-template-columns:1fr; gap:0;}
+  .step{border-right:none; border-bottom:1px solid var(--border);}
+  .step:last-child{border-bottom:none;}
+  section{padding:72px 20px;}
+  footer{flex-direction:column; text-align:center;}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">VSME Simple<sup>ES</sup></a>
+  <div class="nav-links">
+    <a href="#problema">El problema</a>
+    <a href="#como-funciona">Cómo funciona</a>
+    <a href="#acceso" class="nav-cta">Acceso anticipado</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-eyebrow">Normativa europea · Pymes españolas</div>
+  <h1>Tu cliente te pide datos<br>de sostenibilidad.<br><em>No saber qué enviar<br>cuesta contratos.</em></h1>
+  <p class="hero-sub">VSME Simple genera el informe oficial que te exigen en 20 minutos. En español. Sin consultores ni tecnicismos.</p>
+  <form class="hero-form" onsubmit="handleForm(event,'s1')">
+    <input type="email" placeholder="email@tuempresa.es" required>
+    <button type="submit" class="btn">Quiero acceso anticipado</button>
+  </form>
+  <div class="success-msg" id="s1">Apuntado. Te contactamos en menos de 24&nbsp;h.</div>
+  <p class="hero-note">Acceso gratuito durante el piloto &nbsp;·&nbsp; Sin tarjeta de crédito</p>
+  <div class="hero-clients">
+    <span class="hero-clients-label">Tu cliente puede ser uno de estos</span>
+    <span class="client-tag">Leroy Merlin</span>
+    <span class="client-tag">Mahou San Miguel</span>
+    <span class="client-tag">Ferrovial</span>
+    <span class="client-tag">Repsol</span>
+    <span class="client-tag">El Corte Inglés</span>
+    <span class="client-tag">Mango</span>
+    <span class="client-tag">Iberdrola</span>
+    <span class="client-tag">Sacyr</span>
+  </div>
+</header>
+
+<!-- PROBLEMA -->
+<section class="problema" id="problema">
+  <div class="container">
+    <div class="section-kicker">El problema</div>
+    <h2>Lo que nadie te está<br>explicando con claridad</h2>
+    <div class="problema-layout">
+      <div class="problema-copy reveal">
+        <h3>Las grandes empresas ahora necesitan datos de sostenibilidad de todos sus proveedores</h3>
+        <p>Con la normativa europea CSRD, empresas como Leroy Merlin, Mahou o Ferrovial tienen la obligación legal de reportar el impacto medioambiental y social de toda su cadena de suministro.</p>
+        <p>Para hacerlo, necesitan esos datos de ti. Si no los tienes, empiezas a perder contratos. No es una amenaza futura — ya está pasando en España.</p>
+        <p>El estándar diseñado para que las pymes puedan responder a esta exigencia se llama <strong>VSME</strong>. El problema es que nadie lo explica en español ni ofrece una herramienta accesible para generarlo.</p>
+      </div>
+      <div class="pain-items reveal d1">
+        <div class="pain-item">
+          <div class="pain-icon">×</div>
+          <p>Te llega un formulario de sostenibilidad de tu cliente y no sabes qué rellenar ni por dónde empezar</p>
+        </div>
+        <div class="pain-item">
+          <div class="pain-icon">×</div>
+          <p>Las consultoras ESG cobran entre 3.000&nbsp;€ y 15.000&nbsp;€ por elaborar este informe anualmente</p>
+        </div>
+        <div class="pain-item">
+          <div class="pain-icon">×</div>
+          <p>Las herramientas digitales disponibles están en inglés y pensadas para grandes empresas con equipo dedicado</p>
+        </div>
+        <div class="pain-item">
+          <div class="pain-icon">×</div>
+          <p>Sin ese informe, arriesgas perder la renovación de contratos con clientes que representan una parte esencial de tu facturación</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CÓMO FUNCIONA -->
+<section class="como" id="como-funciona">
+  <div class="container">
+    <div class="section-kicker reveal">Cómo funciona</div>
+    <h2 class="reveal">El informe VSME en tres pasos</h2>
+    <p class="section-body reveal">El módulo básico del VSME cubre lo esencial que te pide tu cliente grande. Lo convertimos en un proceso guiado de 20 minutos.</p>
+    <div class="steps-grid">
+      <div class="step reveal">
+        <div class="step-n">01</div>
+        <h3>Respondes preguntas sencillas</h3>
+        <p>Te guiamos por el módulo básico: consumo energético, emisiones, agua, residuos y datos laborales. Sin tecnicismos. Sin conocimientos previos de sostenibilidad.</p>
+      </div>
+      <div class="step reveal d1">
+        <div class="step-n">02</div>
+        <h3>La IA genera tu informe</h3>
+        <p>Con tus respuestas, generamos automáticamente el informe en el formato estándar europeo VSME, listo para enviar al departamento de compras de tu cliente.</p>
+      </div>
+      <div class="step reveal d2">
+        <div class="step-n">03</div>
+        <h3>Descargas el PDF en español</h3>
+        <p>Un informe profesional, en español, con el formato que reconocen los departamentos de sostenibilidad de Leroy Merlin, Ferrovial o cualquier empresa de tu cadena.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUIÉN -->
+<section class="para-quien" id="para-quien">
+  <div class="container">
+    <div class="section-kicker reveal">¿Para quién es?</div>
+    <h2 class="reveal">Diseñado para la pyme<br>proveedora española</h2>
+    <div class="audience-grid">
+      <div class="aud-card reveal">
+        <div class="aud-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+        </div>
+        <h3>Proveedores industriales</h3>
+        <p>Fabricantes, talleres y empresas de materiales que suministran a grandes grupos industriales o constructoras con políticas ESG activas.</p>
+      </div>
+      <div class="aud-card reveal d1">
+        <div class="aud-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3>Sector alimentación y retail</h3>
+        <p>Productores y distribuidores que proveen a grandes cadenas de alimentación o grupos de distribución con cadenas de valor bajo escrutinio ESG.</p>
+      </div>
+      <div class="aud-card reveal d2">
+        <div class="aud-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/></svg>
+        </div>
+        <h3>Servicios y mantenimiento</h3>
+        <p>Empresas de limpieza, seguridad, consultoría o mantenimiento que trabajan con clientes corporativos que ya exigen el informe VSME para la renovación de contratos.</p>
+      </div>
+      <div class="aud-card reveal d3">
+        <div class="aud-icon">
+          <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+        </div>
+        <h3>Moda, textil y packaging</h3>
+        <p>Fabricantes que suministran a Mango, Inditex, El Corte Inglés u otras marcas cuyas exigencias de cadena de valor son cada vez más estrictas en 2026.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARATIVA -->
+<section class="comparativa" id="comparativa">
+  <div class="container">
+    <div class="section-kicker reveal">Comparativa</div>
+    <h2 class="reveal">VSME Simple frente a<br>una consultora ESG</h2>
+    <div class="vs-wrap">
+      <div class="vs-card malo reveal">
+        <div class="vs-head">Contratar una consultora ESG</div>
+        <div class="vs-body">
+          <div class="vs-row"><span class="vs-check">✕</span><span>Entre 3.000&nbsp;€ y 15.000&nbsp;€ por informe anual</span></div>
+          <div class="vs-row"><span class="vs-check">✕</span><span>2 a 6 semanas de proceso entre reuniones y revisiones</span></div>
+          <div class="vs-row"><span class="vs-check">✕</span><span>Informe en inglés o con jerga técnica difícil de entender</span></div>
+          <div class="vs-row"><span class="vs-check">✕</span><span>Dependencia total del consultor para actualizar el informe</span></div>
+          <div class="vs-row"><span class="vs-check">✕</span><span>Tienes que volver a pagar íntegramente cada año</span></div>
+        </div>
+      </div>
+      <div class="vs-card bueno reveal d1">
+        <div class="vs-head">VSME Simple</div>
+        <div class="vs-body">
+          <div class="vs-row"><span class="vs-check">✓</span><span>49&nbsp;€/mes — o acceso gratuito durante el piloto</span></div>
+          <div class="vs-row"><span class="vs-check">✓</span><span>20 minutos desde que entras hasta el PDF descargado</span></div>
+          <div class="vs-row"><span class="vs-check">✓</span><span>Todo en español, guiado paso a paso, sin jerga</span></div>
+          <div class="vs-row"><span class="vs-check">✓</span><span>Tus datos guardados y actualizables cuando lo necesites</span></div>
+          <div class="vs-row"><span class="vs-check">✓</span><span>Construido específicamente para pymes españolas proveedoras</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final" id="acceso">
+  <div class="container">
+    <div class="section-kicker reveal">Acceso anticipado</div>
+    <h2 class="reveal">Sé de los primeros<br>en tenerlo resuelto</h2>
+    <p class="section-body reveal">Estamos en fase de piloto con un grupo reducido de empresas. Los primeros usuarios tienen acceso gratuito y contribuyen a construir el producto con su experiencia real.</p>
+    <form class="cta-final-form reveal" onsubmit="handleForm(event,'s2')">
+      <input type="email" placeholder="email@tuempresa.es" required>
+      <button type="submit" class="btn">Apuntarme al piloto</button>
+    </form>
+    <div class="success-msg" id="s2">Apuntado. Gonzalo te escribe personalmente en menos de 24&nbsp;h.</div>
+    <p class="hero-note reveal">Sin compromiso &nbsp;·&nbsp; Acceso gratuito durante el piloto &nbsp;·&nbsp; Gonzalo te responde personalmente</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand">VSME Simple</span>
+  <p>Madrid, España &nbsp;·&nbsp; <a href="mailto:gonzalovsme@gmail.com">gonzalovsme@gmail.com</a> &nbsp;·&nbsp; © 2026</p>
+</footer>
+
+<script>
+// Reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Forms
+function handleForm(e, sid) {
+  e.preventDefault();
+  const email = e.target.querySelector('input').value;
+  e.target.style.display = 'none';
+  document.getElementById(sid).style.display = 'block';
+  console.log('Email:', email); // Conectar con Supabase aquí
+}
+</script>
+</body>
+</html>
